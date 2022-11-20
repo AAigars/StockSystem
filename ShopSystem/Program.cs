@@ -5,8 +5,11 @@ namespace ShopSystem
         /// <summary>
         /// Static variables.
         /// </summary>
+        public static string title = "Stock System";
         public static string storageDirectory = "./data";
-        public static Authentication.Manager authManager = new Authentication.Manager();
+
+        public static Authentication.Manager authManager = new();
+        public static Stock.Manager stockManager = new();
 
         /// <summary>
         ///  The main entry point for the application.
@@ -14,7 +17,7 @@ namespace ShopSystem
         [STAThread]
         static void Main()
         {
-            // Create directory for Shop System Data.
+            // Create directory for the Application Data.
             if (!Directory.Exists(storageDirectory))
             {
                 Directory.CreateDirectory(storageDirectory);

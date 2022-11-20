@@ -2,22 +2,22 @@
 {
     public class User
     {
-        private string username;
-        private string hash, salt;
-        private Role role;
+        private string Username;
+        private string Hash, Salt;
+        private Role Role;
 
         public User(string username, Role role, string hash, string salt)
         {
-            this.username = username;
-            this.role = role;
+            this.Username = username;
+            this.Role = role;
 
-            this.hash = hash;
-            this.salt = salt;
+            this.Hash = hash;
+            this.Salt = salt;
         }
 
         public string Serialize()
         {
-            return string.Format("{0}:{1}:{2}:{3}", username, (int)role, hash, salt);
+            return string.Format("{0}:{1}:{2}:{3}", Username, (int)Role, Hash, Salt);
         }
 
         public static User? Deserialize(string data)
@@ -28,22 +28,22 @@
 
         public string GetUsername()
         {
-            return username;
+            return Username;
         }
 
         public Role GetRole()
         {
-            return role;
+            return Role;
         }
 
         public string GetHash()
         {
-            return hash;
+            return Hash;
         }
 
         public string GetSalt()
         {
-            return salt;
+            return Salt;
         }
     }
 }

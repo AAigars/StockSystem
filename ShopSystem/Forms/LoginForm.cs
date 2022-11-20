@@ -11,14 +11,14 @@ namespace ShopSystem
         {
             if (txtUsername.Text == string.Empty || txtPassword.Text == string.Empty)
             {
-                MessageBox.Show("Enter a valid username or pasword.", "Shop System");
+                MessageBox.Show("Enter a valid username or pasword.", Program.title);
                 return;
             }
 
             var user = Program.authManager.AuthUser(txtUsername.Text, txtPassword.Text);
             if (user == null)
             {
-                MessageBox.Show("You have entered an incorrect username or password.", "Shop System");
+                MessageBox.Show("You have entered an incorrect username or password.", Program.title);
                 return;
             }
 
