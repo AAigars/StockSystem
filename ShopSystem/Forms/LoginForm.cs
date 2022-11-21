@@ -22,7 +22,7 @@ namespace ShopSystem
                 return;
             }
 
-            new ShopForm().Show();
+            new StockForm().Show();
             Hide();
         }
 
@@ -33,7 +33,7 @@ namespace ShopSystem
 
         private void lblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            (new RegisterForm()).Show();
+            new RegisterForm().Show();
             Hide();
 
             // handle switching to register form

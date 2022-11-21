@@ -4,11 +4,19 @@
     {
         private string Name;
         private int Quantity;
+        private string? Image;
 
         public Product(string name, int quantity)
         {
             Name = name;
             Quantity = quantity;
+        }
+
+        public Product(string name, int quantity, string image)
+        {
+            Name = name;
+            Quantity = quantity;
+            Image = image;
         }
 
         public string Serialize()
@@ -30,6 +38,11 @@
         public int GetQuantity()
         {
             return Quantity;
+        }
+
+        public string? GetImage()
+        {
+            return Image;
         }
     }
 }

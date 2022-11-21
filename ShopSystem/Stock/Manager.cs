@@ -18,5 +18,15 @@
                 products.Add(product);
             }
         }
+
+        public void AddProduct(string name, int quantity, string image)
+        {
+
+        }
+
+        public List<Product> GetProducts()
+        {
+            return products;
+        }
     }
 }

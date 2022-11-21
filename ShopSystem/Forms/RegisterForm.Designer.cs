@@ -116,7 +116,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "RegisterForm";
-            this.Text = "Shop System";
+            this.Text = "Stock System";
             this.ResumeLayout(false);
             this.PerformLayout();
 
