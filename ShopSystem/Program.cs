@@ -11,6 +11,8 @@ namespace ShopSystem
         public static Authentication.Manager authManager = new();
         public static Stock.Manager stockManager = new();
 
+        public static LoginForm loginForm;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -25,7 +27,8 @@ namespace ShopSystem
 
             // Form entry point.
             ApplicationConfiguration.Initialize();
-            Application.Run(new LoginForm());
+            loginForm = new();            
+            Application.Run(loginForm);
         }
     }
 }

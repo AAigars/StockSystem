@@ -22,16 +22,20 @@ namespace ShopSystem
                 return;
             }
 
-            MessageBox.Show("yooo");
+            new ShopForm().Show();
+            Hide();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void lblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            (new RegisterForm()).Show();
+            Hide();
+
             // handle switching to register form
             // todo: global form handler? (prevent creating duplicate instances of forms)
         }

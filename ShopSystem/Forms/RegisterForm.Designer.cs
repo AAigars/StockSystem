@@ -99,6 +99,7 @@
             this.lblLogin.TabIndex = 6;
             this.lblLogin.TabStop = true;
             this.lblLogin.Text = "Already have an account? Click to login!";
+            this.lblLogin.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblLogin_LinkClicked);
             // 
             // RegisterForm
             // 

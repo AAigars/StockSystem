@@ -29,5 +29,11 @@
         {
             Close();
         }
+
+        private void lblLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Program.loginForm.Show();
+            Close();
+        }
     }
 }
