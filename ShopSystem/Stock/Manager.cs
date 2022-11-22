@@ -21,10 +21,16 @@
 
         public Product AddProduct(string name, int quantity, string image = "")
         {
-            var product = new Product(name, quantity);
+            var product = new Product(name, quantity, image);
             products.Add(product);
 
+            File.AppendAllText(path, product.Serialize() + Environment.NewLine);
             return product;
+        }
+
+        public void RemoveProduct()
+        {
+            // TODO: 
         }
 
         public List<Product> GetProducts()

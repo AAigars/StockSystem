@@ -1,4 +1,6 @@
-﻿namespace ShopSystem.Stock
+﻿using System.Web;
+
+namespace ShopSystem.Stock
 {
     public class Product
     {
@@ -10,6 +12,7 @@
         {
             Name = name;
             Quantity = quantity;
+            Image = null;
         }
 
         public Product(string name, int quantity, string image)
@@ -21,13 +24,26 @@
 
         public string Serialize()
         {
-            return string.Format("{0}:{1}", Name, Quantity);
+            // image path is encoded, so special characters do not intefere when deserializing
+            string[] data = { Name, Quantity.ToString() };
+            if (Image != null) 
+                data.Append(HttpUtility.UrlEncode(Image));
+
+            return string.Join(":", data);
         }
 
         public static Product? Deserialize(string data)
         {
             string[] split = data.Split(":");
-            return new Product(split[0], Convert.ToInt32(split[1]));
+            if (split.Length == 3) // product supports an image
+            {
+                // image path is decoded, as it is encoded to prevent special characters from intefering when deserializing
+                return new Product(split[0], Convert.ToInt32(split[1]), HttpUtility.UrlDecode(split[2]));
+            }
+            else
+            {
+                return new Product(split[0], Convert.ToInt32(split[1]));
+            }
         }
 
         public string GetName()

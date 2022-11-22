@@ -35,5 +35,14 @@
             Program.loginForm.Show();
             Close();
         }
+
+        private void RegisterForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // shouldn't ever be null anyway (without LoginForm, RegisterForm won't even be instantiated)
+            // force the login form to close as that is the entry point of the program
+            // otherwise closing the register form will cause the program to remain open in the background.
+            if (Program.loginForm != null)
+                Program.loginForm.Close();
+        }
     }
 }

@@ -17,7 +17,7 @@
 
         public string Serialize()
         {
-            return string.Format("{0}:{1}:{2}:{3}", Username, (int)Role, Hash, Salt);
+            return string.Join(":", new string[] { Username, Convert.ToString((int)Role), Hash, Salt }); 
         }
 
         public static User? Deserialize(string data)

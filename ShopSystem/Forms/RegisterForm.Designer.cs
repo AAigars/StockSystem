@@ -117,6 +117,7 @@
             this.MaximizeBox = false;
             this.Name = "RegisterForm";
             this.Text = "Stock System";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RegisterForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
