@@ -19,9 +19,12 @@
             }
         }
 
-        public void AddProduct(string name, int quantity, string image)
+        public Product AddProduct(string name, int quantity, string image = "")
         {
+            var product = new Product(name, quantity);
+            products.Add(product);
 
+            return product;
         }
 
         public List<Product> GetProducts()
