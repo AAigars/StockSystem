@@ -76,11 +76,27 @@
                 return;
             }
 
+            // check for valid product name cell
+            var cell = dgvProducts.Rows[selectedRow].Cells[1].Value;
+            if (cell == null) return;
+
+            // get the product object from the stock manager
+            var product = Program.stockManager.GetProduct(cell.ToString());
+            if (product == null) return;
+
+            // set the new details
+            if (imagePath != null) product.SetImage(imagePath);
+            product.SetName(txtName.Text);
+            product.SetQuantity(Convert.ToInt32(nupQuantity.Value));
+
+            // force products to be saved
+            Program.stockManager.SaveProducts();
+
             // update the product information text boxes to match the cell values
             var cells = dgvProducts.Rows[selectedRow].Cells;
-            cells[0].Value = imagePath != null ? Image.FromFile(imagePath) : cells[0].Value; // only update image if new one selected
-            cells[1].Value = txtName.Text;
-            cells[2].Value = nupQuantity.Value;
+            cells[0].Value = product.GetImage() != null ? Image.FromFile(product.GetImage()) : cells[0].Value; // only update image if new one selected
+            cells[1].Value = product.GetName();
+            cells[2].Value = product.GetQuantity();
 
             // reset image path
             imagePath = null;

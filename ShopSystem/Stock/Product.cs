@@ -60,5 +60,20 @@ namespace ShopSystem.Stock
         {
             return Image;
         }
+
+        public void SetName(string name)
+        {
+            Name = name;
+        }
+
+        public void SetQuantity(int quantity)
+        {
+            Quantity = quantity;
+        }
+
+        public void SetImage(string image)
+        {
+            Image = image;
+        }
     }
 }

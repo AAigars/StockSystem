@@ -74,7 +74,7 @@
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
             this.dgvProducts.RowTemplate.Height = 25;
-            this.dgvProducts.Size = new System.Drawing.Size(440, 221);
+            this.dgvProducts.Size = new System.Drawing.Size(447, 230);
             this.dgvProducts.TabIndex = 0;
             this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellClick);
             // 

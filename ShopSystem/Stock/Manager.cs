@@ -37,6 +37,16 @@
             if (product == null) return;
             products.Remove(product);
 
+            SaveProducts();
+        }
+
+        public Product? GetProduct(string name)
+        {
+            return products.Find(product => product.GetName().ToLower() == name.ToLower());
+        }
+
+        public void SaveProducts()
+        {
             var serialized = new List<string>();
             products.ForEach(product => serialized.Add(product.Serialize()));
             File.WriteAllLines(path, serialized);
