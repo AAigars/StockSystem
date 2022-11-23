@@ -15,11 +15,11 @@
             // setup dgv columns
             var _image = new DataGridViewImageColumn();
             _image.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            _image.DefaultCellStyle.NullValue = null;
             dgvProducts.Columns.Add(_image);
 
             // hack to get around DataGridViewImageColumn displaying a X cross
             // https://stackoverflow.com/a/68331322
-            dgvProducts.Columns[0].DefaultCellStyle.NullValue = null;
             dgvProducts.Rows[0].Cells[0].Value = null;
 
             // create rest of columns
@@ -52,6 +52,12 @@
         {
             var product = Program.stockManager.AddProduct(
                 txtName.Text, Convert.ToInt32(nupQuantity.Value), imagePath);
+
+            if (product == null)
+            {
+                MessageBox.Show("Product with this name already exists!", Program.title);
+                return;
+            }
 
             var image = product.GetImage();
             dgvProducts.Rows.Add(new object[] {
@@ -88,6 +94,13 @@
                 MessageBox.Show("You have not selected a row to delete!", Program.title);
                 return;
             }
+
+            // make sure the name cell is valid
+            var cell = dgvProducts.Rows[selectedRow].Cells[1].Value;
+            if (cell == null) return;
+
+            // remove from the stock manager
+            Program.stockManager.RemoveProduct(cell.ToString());
 
             // remove the row which is at the selected index
             dgvProducts.Rows.RemoveAt(selectedRow);

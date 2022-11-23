@@ -19,8 +19,11 @@
             }
         }
 
-        public Product AddProduct(string name, int quantity, string image = "")
+        public Product? AddProduct(string name, int quantity, string image = "")
         {
+            var exists = products.Find(product => product.GetName().ToLower() == name.ToLower());
+            if (exists != null) return null;
+
             var product = new Product(name, quantity, image);
             products.Add(product);
 
@@ -28,9 +31,15 @@
             return product;
         }
 
-        public void RemoveProduct()
+        public void RemoveProduct(string name)
         {
-            // TODO: 
+            var product = products.Find(product => product.GetName() == name);
+            if (product == null) return;
+            products.Remove(product);
+
+            var serialized = new List<string>();
+            products.ForEach(product => serialized.Add(product.Serialize()));
+            File.WriteAllLines(path, serialized);
         }
 
         public List<Product> GetProducts()

@@ -11,7 +11,7 @@ namespace ShopSystem.Stock
         public Product(string name, int quantity)
         {
             Name = name;
-            Quantity = quantity;
+            Quantity = quantity;    
             Image = null;
         }
 
@@ -25,9 +25,9 @@ namespace ShopSystem.Stock
         public string Serialize()
         {
             // image path is encoded, so special characters do not intefere when deserializing
-            string[] data = { Name, Quantity.ToString() };
+            var data = new List<string>() { Name, Quantity.ToString() };
             if (Image != null) 
-                data.Append(HttpUtility.UrlEncode(Image));
+                data.Add(HttpUtility.UrlEncode(Image));
 
             return string.Join(":", data);
         }
