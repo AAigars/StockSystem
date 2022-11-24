@@ -12,6 +12,7 @@ namespace ShopSystem
         public static Stock.Manager stockManager = new();
 
         public static LoginForm? loginForm;
+        public static Authentication.User? activeUser;
 
         /// <summary>
         ///  The main entry point for the application.

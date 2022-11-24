@@ -138,6 +138,7 @@
             this.tslUserManagement.Name = "tslUserManagement";
             this.tslUserManagement.Size = new System.Drawing.Size(104, 22);
             this.tslUserManagement.Text = "User Management";
+            this.tslUserManagement.Click += new System.EventHandler(this.tslUserManagement_Click);
             // 
             // toolStripSeparator2
             // 
@@ -149,6 +150,7 @@
             this.tslSignOut.Name = "tslSignOut";
             this.tslSignOut.Size = new System.Drawing.Size(53, 22);
             this.tslSignOut.Text = "Sign Out";
+            this.tslSignOut.Click += new System.EventHandler(this.tslSignOut_Click);
             // 
             // gbProductInformation
             // 

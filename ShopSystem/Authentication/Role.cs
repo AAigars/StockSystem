@@ -2,7 +2,6 @@
 {
     public enum Role
     {
-        Customer,
         Employee,
         Manager
     }

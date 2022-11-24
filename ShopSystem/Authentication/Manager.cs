@@ -19,7 +19,7 @@
             }
         }
 
-        public User? CreateUser(string username, string password, Role role = Role.Customer)
+        public User? CreateUser(string firstName, string lastName, string username, string password, Role role = Role.Employee)
         {
             var exists = users.Find(user => user.GetUsername() == username);
             if (exists != null) return null;
@@ -27,7 +27,7 @@
             var salt = Utility.Security.GenerateSalt();
             var hash = Utility.Security.HashPassword(password, salt);
 
-            var user = new User(username, role, hash, salt);
+            var user = new User(firstName, lastName, username, role, hash, salt);
             users.Add(user);
 
             File.AppendAllText(path, user.Serialize() + Environment.NewLine);
@@ -41,6 +41,11 @@
 
             var hash = Utility.Security.HashPassword(password, user.GetSalt());
             return hash == user.GetHash() ? user : null;
+        }
+
+        public List<User> GetUsers()
+        {
+            return users;
         }
     }
 }

@@ -1,9 +1,17 @@
-﻿namespace ShopSystem
+﻿using StockSystem.Forms;
+
+namespace ShopSystem
 {
     public partial class StockForm : Form
     {
+        // stores the image path from the OpenFileDialog (btnSelect_Click)
         private string? imagePath = null;
+
+        // stores the selected row in the DataGridView (dgvProducts_CellClick)
         private int selectedRow = -1;
+
+        // stores if the user management form is open
+        private bool isUserManagementOpen = false;
 
         public StockForm()
         {
@@ -12,15 +20,24 @@
 
         private void StockForm_Load(object sender, EventArgs e)
         {
+            // dont load form if no active user
+            if (Program.activeUser == null)
+            {
+                MessageBox.Show("Failed to fetch user data, invalid login?", Program.title);
+                Close();
+                return;
+            }
+
             // setup dgv columns
             var _image = new DataGridViewImageColumn();
+            _image.Name = "Image";
             _image.ImageLayout = DataGridViewImageCellLayout.Zoom;
             _image.DefaultCellStyle.NullValue = null;
             dgvProducts.Columns.Add(_image);
 
             // hack to get around DataGridViewImageColumn displaying a X cross
             // https://stackoverflow.com/a/68331322
-            dgvProducts.Rows[0].Cells[0].Value = null;
+            dgvProducts.Rows[0].Cells["Image"].Value = null;
 
             // create rest of columns
             dgvProducts.Columns.Add("name", "Name");
@@ -37,6 +54,9 @@
                     product.GetQuantity().ToString()
                 });
             }
+
+            // set label first name and last name
+            tslName.Text = Program.activeUser.GetFirstName() + " " + Program.activeUser.GetLastName();
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
@@ -50,15 +70,18 @@
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            // attempt to add a new product in the stock manager, which will then be saved to a file.
             var product = Program.stockManager.AddProduct(
                 txtName.Text, Convert.ToInt32(nupQuantity.Value), imagePath);
 
+            // AddProduct will only return null, if the product name has already been used.
             if (product == null)
             {
                 MessageBox.Show("Product with this name already exists!", Program.title);
                 return;
             }
 
+            // add the new product to the DataGridView
             var image = product.GetImage();
             dgvProducts.Rows.Add(new object[] {
                 image != null ? Image.FromFile(image) : null,
@@ -77,7 +100,7 @@
             }
 
             // check for valid product name cell
-            var cell = dgvProducts.Rows[selectedRow].Cells[1].Value;
+            var cell = dgvProducts.Rows[selectedRow].Cells["Name"].Value;
             if (cell == null) return;
 
             // get the product object from the stock manager
@@ -94,9 +117,9 @@
 
             // update the product information text boxes to match the cell values
             var cells = dgvProducts.Rows[selectedRow].Cells;
-            cells[0].Value = product.GetImage() != null ? Image.FromFile(product.GetImage()) : cells[0].Value; // only update image if new one selected
-            cells[1].Value = product.GetName();
-            cells[2].Value = product.GetQuantity();
+            cells["Image"].Value = product.GetImage() != null ? Image.FromFile(product.GetImage()) : cells[0].Value; // only update image if new one selected
+            cells["Name"].Value = product.GetName();
+            cells["Quantity"].Value = product.GetQuantity();
 
             // reset image path
             imagePath = null;
@@ -112,7 +135,7 @@
             }
 
             // make sure the name cell is valid
-            var cell = dgvProducts.Rows[selectedRow].Cells[1].Value;
+            var cell = dgvProducts.Rows[selectedRow].Cells["Name"].Value;
             if (cell == null) return;
 
             // remove from the stock manager
@@ -127,7 +150,7 @@
             // shouldn't ever be null anyway (without LoginForm, StockForm won't even be instantiated)
             // force the login form to close as that is the entry point of the program
             // otherwise closing the stock form will cause the program to remain open in the background.
-            if (Program.loginForm != null)
+            if (Program.loginForm != null && !Program.loginForm.Visible && !isUserManagementOpen)
                 Program.loginForm.Close();
         }
 
@@ -141,12 +164,44 @@
             // check if the cells have data stored in them
             // otherwise an exception will be thrown for an attempt to cast null values
             var cells = dgvProducts.Rows[selectedRow].Cells;
-            if (cells[1].Value == null || cells[2].Value == null)
+            if (cells["Name"].Value == null || cells["Quantity"].Value == null)
                 return;
 
             // cast the object values from the cells to the required data type.
-            txtName.Text = Convert.ToString(cells[1].Value);
-            nupQuantity.Value = Convert.ToInt32(cells[2].Value);
+            txtName.Text = Convert.ToString(cells["Name"].Value);
+            nupQuantity.Value = Convert.ToInt32(cells["Quantity"].Value);
+        }
+
+        private void tslUserManagement_Click(object sender, EventArgs e)
+        {
+            // check if the user is the correct role
+            if (Program.activeUser == null || Program.activeUser.GetRole() != Authentication.Role.Manager)
+            {
+                MessageBox.Show("You do not have enough privileges to access this menu!", Program.title);
+                return;
+            }
+
+            // load up the user management form
+            new UserManagementForm().Show();
+
+            // prevent stock form from terminating program by closing LoginForm
+            isUserManagementOpen = true;
+
+            // close the stock form
+            Close();
+        }
+
+        private void tslSignOut_Click(object sender, EventArgs e)
+        {
+            // set the active user to null
+            Program.activeUser = null;
+
+            // load up the login form
+            if (Program.loginForm != null)
+                Program.loginForm.Show();
+
+            // close the stock form
+            Close();
         }
     }
 }

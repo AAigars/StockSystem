@@ -24,10 +24,10 @@ namespace ShopSystem.Stock
 
         public string Serialize()
         {
-            // image path is encoded, so special characters do not intefere when deserializing
             var data = new List<string>() { Name, Quantity.ToString() };
-            if (Image != null) 
-                data.Add(HttpUtility.UrlEncode(Image));
+
+            // image path is encoded, so special characters do not intefere when deserializing
+            if (Image != null) data.Add(HttpUtility.UrlEncode(Image));
 
             return string.Join(":", data);
         }
