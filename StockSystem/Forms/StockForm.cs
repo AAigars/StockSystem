@@ -204,5 +204,30 @@
             // close the stock form
             Close();
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            // clear the dgv rows
+            dgvProducts.Rows.Clear();
+
+            // hack to get around DataGridViewImageColumn displaying a X cross
+            // https://stackoverflow.com/a/68331322
+            dgvProducts.Rows[0].Cells["Image"].Value = null;
+
+            // insert the rows
+            foreach (var product in Program.stockManager.GetProducts())
+            {
+                // check if the product name contains the search
+                if (!product.GetName().Contains(txtSearch.Text)) continue;
+
+                // handle products with images
+                var image = product.GetImage();
+                dgvProducts.Rows.Add(new object[] {
+                    image != null ? Image.FromFile(image) : null,
+                    product.GetName(),
+                    product.GetQuantity().ToString()
+                });
+            }
+        }
     }
 }

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbViewProducts = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
@@ -58,6 +60,8 @@
             // 
             // gbViewProducts
             // 
+            this.gbViewProducts.Controls.Add(this.btnSearch);
+            this.gbViewProducts.Controls.Add(this.txtSearch);
             this.gbViewProducts.Controls.Add(this.dgvProducts);
             this.gbViewProducts.Location = new System.Drawing.Point(12, 28);
             this.gbViewProducts.Name = "gbViewProducts";
@@ -66,15 +70,33 @@
             this.gbViewProducts.TabStop = false;
             this.gbViewProducts.Text = "View Products";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(353, 17);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(100, 23);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(6, 17);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.PlaceholderText = "Product Name";
+            this.txtSearch.Size = new System.Drawing.Size(341, 23);
+            this.txtSearch.TabIndex = 1;
+            // 
             // dgvProducts
             // 
             this.dgvProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Location = new System.Drawing.Point(6, 20);
+            this.dgvProducts.Location = new System.Drawing.Point(6, 46);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
             this.dgvProducts.RowTemplate.Height = 25;
-            this.dgvProducts.Size = new System.Drawing.Size(447, 230);
+            this.dgvProducts.Size = new System.Drawing.Size(447, 204);
             this.dgvProducts.TabIndex = 0;
             this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellClick);
             // 
@@ -262,6 +284,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StockForm_FormClosed);
             this.Load += new System.EventHandler(this.StockForm_Load);
             this.gbViewProducts.ResumeLayout(false);
+            this.gbViewProducts.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.tsActions.ResumeLayout(false);
             this.tsActions.PerformLayout();
@@ -296,5 +319,7 @@
         private OpenFileDialog ofdImage;
         private ToolStripLabel tslUserManagement;
         private ToolStripSeparator toolStripSeparator2;
+        private TextBox txtSearch;
+        private Button btnSearch;
     }
 }

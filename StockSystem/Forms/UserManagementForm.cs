@@ -177,5 +177,27 @@
                 return;
             }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            // clear the dgv rows
+            dgvUsers.Rows.Clear();
+
+            // insert the rows
+            foreach (var user in Program.authManager.GetUsers())
+            {
+                // check if the product name contains the search
+                if (!user.GetUsername().Contains(txtSearch.Text)) continue;
+
+                // insert the users
+                dgvUsers.Rows.Add(new string[]
+                {
+                    user.GetFirstName(),
+                    user.GetLastName(),
+                    user.GetUsername(),
+                    user.GetRole().ToString()
+                });
+            }
+        }
     }
 }
