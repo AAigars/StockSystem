@@ -97,5 +97,74 @@ namespace StockSystem.Forms
             txtLastName.Text = Convert.ToString(cells["LastName"].Value);
             cbRole.SelectedIndex = cbRole.FindString(Convert.ToString(cells["Role"].Value));
         }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            // make sure a row has been selected
+            if (selectedRow == -1)
+            {
+                MessageBox.Show("You have not selected a row to update!", Program.title);
+                return;
+            }
+
+            // grab the username from the cells
+            var cell = dgvUsers.Rows[selectedRow].Cells["Username"].Value;
+            if (cell == null) return;
+
+            // get the user
+            var user = Program.authManager.GetUser(cell.ToString());
+            if (user == null) return;
+
+            // update the user
+            user.SetFirstName(txtFirstName.Text);
+            user.SetLastName(txtLastName.Text);
+            user.SetRole(Enum.Parse<ShopSystem.Authentication.Role>(cbRole.SelectedItem.ToString()));
+
+            // force update the user
+            Program.authManager.SaveUsers();
+
+            // update the cells
+            var cells = dgvUsers.Rows[selectedRow].Cells;
+            cells["FirstName"].Value = user.GetFirstName();
+            cells["LastName"].Value = user.GetLastName();
+            cells["Role"].Value = user.GetRole();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            // make sure a row has been selected
+            if (selectedRow == -1)
+            {
+                MessageBox.Show("You have not selected a row to delete!", Program.title);
+                return;
+            }
+
+            // grab the username from the cells
+            var cell = dgvUsers.Rows[selectedRow].Cells["Username"].Value;
+            if (cell == null) return;
+
+            // make sure that the logged in user isnt the same as the one being deleted
+            if (Program.activeUser != null && Program.activeUser.GetUsername() == cell.ToString())
+            {
+                MessageBox.Show("You cannot delete your own account...!", Program.title);
+                return;
+            }
+
+            // remove the user
+            Program.authManager.RemoveUser(cell.ToString());
+
+            // remove the user from the dgv
+            dgvUsers.Rows.RemoveAt(selectedRow);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            // make sure a row has been selected
+            if (selectedRow == -1)
+            {
+                MessageBox.Show("You have not selected a row to reset the password for!", Program.title);
+                return;
+            }
+        }
     }
 }

@@ -59,5 +59,20 @@
         {
             return Salt;
         }
+
+        public void SetFirstName(string firstName)
+        {
+            FirstName = firstName;
+        }
+
+        public void SetLastName(string lastName)
+        {
+            LastName = lastName;
+        }
+
+        public void SetRole(Role role)
+        {
+            Role = role;
+        }
     }
 }

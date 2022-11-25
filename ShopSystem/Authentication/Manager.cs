@@ -1,4 +1,6 @@
-﻿namespace ShopSystem.Authentication
+﻿using ShopSystem.Stock;
+
+namespace ShopSystem.Authentication
 {
     public class Manager
     {
@@ -43,9 +45,31 @@
             return hash == user.GetHash() ? user : null;
         }
 
+        public void SaveUsers()
+        {
+            var serialized = new List<string>();
+            users.ForEach(user => serialized.Add(user.Serialize()));
+
+            File.WriteAllLines(path, serialized);
+        }
+
+        public void RemoveUser(string name)
+        {
+            var user = GetUser(name);
+            if (user == null) return;
+
+            users.Remove(user);
+            SaveUsers();
+        }
+
         public List<User> GetUsers()
         {
             return users;
+        }
+
+        public User? GetUser(string username)
+        {
+            return users.Find(user => user.GetUsername() == username);
         }
     }
 }
