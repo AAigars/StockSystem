@@ -11,7 +11,7 @@ namespace StockSystem.Stock
         public Product(string name, int quantity)
         {
             Name = name;
-            Quantity = quantity;    
+            Quantity = quantity;
             Image = null;
         }
 

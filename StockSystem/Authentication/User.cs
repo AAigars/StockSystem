@@ -10,7 +10,7 @@
         public User(string firstName, string lastName, string username, Role role, string hash, string salt)
         {
             this.FirstName = firstName;
-            this.LastName = lastName;   
+            this.LastName = lastName;
 
             this.Username = username;
             this.Role = role;
@@ -21,7 +21,7 @@
 
         public string Serialize()
         {
-            return string.Join(":", new string[] { FirstName, LastName, Username, Convert.ToString((int)Role), Hash, Salt }); 
+            return string.Join(":", new string[] { FirstName, LastName, Username, Convert.ToString((int)Role), Hash, Salt });
         }
 
         public static User? Deserialize(string data)

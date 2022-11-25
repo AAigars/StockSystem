@@ -10,7 +10,7 @@
         private void btnRegister_Click(object sender, EventArgs e)
         {
             // validation check - make sure that the username and password is actually present
-            if 
+            if
             (
                 txtFirstName.Text == string.Empty || txtLastName.Text == string.Empty ||
                 txtUsername.Text == string.Empty || txtPassword.Text == string.Empty

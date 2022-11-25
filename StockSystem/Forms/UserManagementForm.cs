@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace StockSystem.Forms
+﻿namespace StockSystem.Forms
 {
     public partial class UserManagementForm : Form
     {
@@ -36,7 +34,7 @@ namespace StockSystem.Forms
             {
                 dgvUsers.Rows.Add(new string[]
                 {
-                    user.GetFirstName(), 
+                    user.GetFirstName(),
                     user.GetLastName(),
                     user.GetUsername(),
                     user.GetRole().ToString()
@@ -100,7 +98,7 @@ namespace StockSystem.Forms
             // check if the cells have data stored in them
             // otherwise an exception will be thrown for an attempt to cast null values
             var cells = dgvUsers.Rows[selectedRow].Cells;
-            if (cells["FirstName"].Value == null || cells["LastName"].Value == null || 
+            if (cells["FirstName"].Value == null || cells["LastName"].Value == null ||
                 cells["Username"].Value == null || cells["Role"].Value == null
             )
                 return;

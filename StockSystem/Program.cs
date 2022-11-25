@@ -29,7 +29,7 @@ namespace StockSystem
             // Form entry point.
             ApplicationConfiguration.Initialize();
 
-            loginForm = new();            
+            loginForm = new();
             Application.Run(loginForm);
         }
     }
