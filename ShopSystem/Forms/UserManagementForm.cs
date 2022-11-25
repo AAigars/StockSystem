@@ -18,6 +18,14 @@ namespace StockSystem.Forms
 
         private void UserManagementForm_Load(object sender, EventArgs e)
         {
+            // dont load form if no active user
+            if (Program.activeUser == null)
+            {
+                MessageBox.Show("Failed to fetch user data, invalid login?", Program.title);
+                Close();
+                return;
+            }
+
             // setup dgv columns
             dgvUsers.Columns.Add("firstName", "First Name");
             dgvUsers.Columns.Add("lastName", "Last Name");
@@ -41,6 +49,9 @@ namespace StockSystem.Forms
             {
                 cbRole.Items.Add(role);
             }
+
+            // set label first name and last name
+            tslName.Text = Program.activeUser.GetFirstName() + " " + Program.activeUser.GetLastName();
         }
 
         private void UserManagementForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -55,7 +66,10 @@ namespace StockSystem.Forms
         private void tslUserManagement_Click(object sender, EventArgs e)
         {
             // load up the user management form
-            new StockForm().Show();
+            var form = new StockForm();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = Location;
+            form.Show();
 
             // prevent stock form from terminating program by closing LoginForm
             isStockOpen = true;

@@ -182,7 +182,10 @@ namespace ShopSystem
             }
 
             // load up the user management form
-            new UserManagementForm().Show();
+            var form = new UserManagementForm();
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = Location;
+            form.Show();
 
             // prevent stock form from terminating program by closing LoginForm
             isUserManagementOpen = true;
