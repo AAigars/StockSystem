@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace ShopSystem.Stock
+namespace StockSystem.Stock
 {
     public class Product
     {

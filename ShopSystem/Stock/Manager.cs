@@ -1,4 +1,4 @@
-﻿namespace ShopSystem.Stock
+﻿namespace StockSystem.Stock
 {
     public class Manager
     {

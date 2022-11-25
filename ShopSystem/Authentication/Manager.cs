@@ -1,6 +1,4 @@
-﻿using ShopSystem.Stock;
-
-namespace ShopSystem.Authentication
+﻿namespace StockSystem.Authentication
 {
     public class Manager
     {

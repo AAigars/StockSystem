@@ -1,5 +1,4 @@
-﻿using ShopSystem;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace StockSystem.Forms
 {
@@ -45,7 +44,7 @@ namespace StockSystem.Forms
             }
 
             // add roles to combobox
-            foreach (var role in Enum.GetValues(typeof(ShopSystem.Authentication.Role)))
+            foreach (var role in Enum.GetValues(typeof(Authentication.Role)))
             {
                 cbRole.Items.Add(role);
             }
@@ -132,7 +131,7 @@ namespace StockSystem.Forms
             // update the user
             user.SetFirstName(txtFirstName.Text);
             user.SetLastName(txtLastName.Text);
-            user.SetRole(Enum.Parse<ShopSystem.Authentication.Role>(cbRole.SelectedItem.ToString()));
+            user.SetRole(Enum.Parse<Authentication.Role>(cbRole.SelectedItem.ToString()));
 
             // force update the user
             Program.authManager.SaveUsers();

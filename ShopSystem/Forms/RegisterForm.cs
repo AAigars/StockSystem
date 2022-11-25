@@ -1,4 +1,4 @@
-﻿namespace ShopSystem
+﻿namespace StockSystem.Forms
 {
     public partial class RegisterForm : Form
     {

@@ -1,4 +1,4 @@
-namespace ShopSystem
+namespace StockSystem
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace ShopSystem
         public static Authentication.Manager authManager = new();
         public static Stock.Manager stockManager = new();
 
-        public static LoginForm? loginForm;
+        public static Forms.LoginForm? loginForm;
         public static Authentication.User? activeUser;
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace ShopSystem.Authentication
+﻿namespace StockSystem.Authentication
 {
     public enum Role
     {

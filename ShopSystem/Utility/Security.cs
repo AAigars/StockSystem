@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace ShopSystem.Utility
+namespace StockSystem.Utility
 {
     public static class Security
     {
