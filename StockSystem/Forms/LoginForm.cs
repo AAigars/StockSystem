@@ -16,6 +16,21 @@ namespace StockSystem.Forms
                 return;
             }
 
+            // check if the user needs a password reset
+            var passwordUser = Program.authManager.GetUser(txtUsername.Text);
+            if (passwordUser != null && passwordUser.GetSalt() == "0" && passwordUser.GetHash() == "0")
+            {
+                // set as active user
+                Program.activeUser = passwordUser;
+
+                // show the password reset window
+                new ResetPassword().Show();
+                Hide();
+
+                // dont continue with the rest of the login
+                return;
+            }
+
             // check if the login details correspond to a created user
             var user = Program.authManager.AuthUser(txtUsername.Text, txtPassword.Text);
             if (user == null)

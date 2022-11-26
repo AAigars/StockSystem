@@ -218,7 +218,7 @@
             foreach (var product in Program.stockManager.GetProducts())
             {
                 // check if the product name contains the search
-                if (!product.GetName().Contains(txtSearch.Text)) continue;
+                if (!product.GetName().Contains(txtSearch.Text, StringComparison.CurrentCultureIgnoreCase)) continue;
 
                 // handle products with images
                 var image = product.GetImage();

@@ -176,6 +176,22 @@
                 MessageBox.Show("You have not selected a row to reset the password for!", Program.title);
                 return;
             }
+
+            // grab the username from the cells
+            var cell = dgvUsers.Rows[selectedRow].Cells["Username"].Value;
+            if (cell == null) return;
+
+            // get the user
+            var user = Program.authManager.GetUser(cell.ToString());
+            if (user == null) return;
+
+            // set the hash and salt to 0 to indicate a password reset
+            user.SetSalt("0");
+            user.SetHash("0");
+
+            // save the users details
+            Program.authManager.SaveUsers();
+            MessageBox.Show("The password for the user has been reset, once they attempt to login they will be asked for a new password!", Program.title);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -187,7 +203,7 @@
             foreach (var user in Program.authManager.GetUsers())
             {
                 // check if the product name contains the search
-                if (!user.GetUsername().Contains(txtSearch.Text)) continue;
+                if (!user.GetUsername().Contains(txtSearch.Text, StringComparison.CurrentCultureIgnoreCase)) continue;
 
                 // insert the users
                 dgvUsers.Rows.Add(new string[]

@@ -74,5 +74,21 @@
         {
             Role = role;
         }
+
+        public void SetPassword(string password)
+        {
+            Salt = Utility.Security.GenerateSalt();
+            Hash = Utility.Security.HashPassword(password, Salt);
+        }
+
+        public void SetSalt(string salt)
+        {
+            Salt = salt;
+        }
+
+        public void SetHash(string hash)
+        {
+            Hash = hash;
+        }
     }
 }
