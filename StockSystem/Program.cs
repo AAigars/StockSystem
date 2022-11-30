@@ -3,7 +3,7 @@ namespace StockSystem
     internal static class Program
     {
         /// <summary>
-        /// Static variables.
+        ///  Static variables.
         /// </summary>
         public static string title = "Stock System";
         public static string storageDirectory = "./data";

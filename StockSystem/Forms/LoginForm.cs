@@ -9,16 +9,9 @@ namespace StockSystem.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // validation check - make sure that the username and password is actually present
-            if (txtUsername.Text == string.Empty || txtPassword.Text == string.Empty)
-            {
-                MessageBox.Show("Enter a valid username or pasword.", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             // check if the user needs a password reset
             var passwordUser = Program.authManager.GetUser(txtUsername.Text);
-            if (passwordUser != null && passwordUser.GetSalt() == "0" && passwordUser.GetHash() == "0")
+            if (passwordUser != null && passwordUser.IsReset())
             {
                 // set as active user
                 Program.activeUser = passwordUser;
@@ -28,6 +21,13 @@ namespace StockSystem.Forms
                 Hide();
 
                 // dont continue with the rest of the login
+                return;
+            }
+
+            // validation check - make sure that the username and password is actually present
+            if (txtUsername.Text == string.Empty || txtPassword.Text == string.Empty)
+            {
+                MessageBox.Show("Enter a valid username or pasword.", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

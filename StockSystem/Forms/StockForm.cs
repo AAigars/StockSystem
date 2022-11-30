@@ -68,6 +68,13 @@
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            // validation check on input
+            if (txtName.Text == string.Empty)
+            {
+                MessageBox.Show("Please specify the name for the product.", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // attempt to add a new product in the stock manager, which will then be saved to a file.
             var product = Program.stockManager.AddProduct(
                 txtName.Text, Convert.ToInt32(nupQuantity.Value), imagePath);
@@ -75,7 +82,7 @@
             // AddProduct will only return null, if the product name has already been used.
             if (product == null)
             {
-                MessageBox.Show("Product with this name already exists!", Program.title);
+                MessageBox.Show("Product with this name already exists!", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

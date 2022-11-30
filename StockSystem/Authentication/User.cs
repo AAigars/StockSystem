@@ -60,6 +60,11 @@
             return salt;
         }
 
+        public bool IsReset()
+        {
+            return hash == "0" && salt == "0";
+        }
+
         public void SetFirstName(string firstName)
         {
             this.firstName = firstName;
