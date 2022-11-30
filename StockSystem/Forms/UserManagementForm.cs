@@ -191,7 +191,8 @@
 
             // save the users details
             Program.authManager.SaveUsers();
-            MessageBox.Show("The password for the user has been reset, once they attempt to login they will be asked for a new password!", Program.title);
+            MessageBox.Show("The password for the user has been reset.\nOnce they attempt to login they will be asked for a new password!", 
+                Program.title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

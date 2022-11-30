@@ -29,7 +29,7 @@
             }
 
             // tell the user the user has been created!
-            MessageBox.Show("The user has been registered!", Program.title);
+            MessageBox.Show("The user has been registered.\nYour account must be activated by a manager before use!", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

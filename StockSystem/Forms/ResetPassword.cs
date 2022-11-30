@@ -28,6 +28,17 @@
 
             // save the user
             Program.authManager.SaveUsers();
+            MessageBox.Show("Your password has been changed.", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // check if the user is a guest
+            if (Program.activeUser.GetRole() == Authentication.Role.Guest)
+            {
+                if (Program.loginForm != null)
+                    Program.loginForm.Show();
+
+                Close();
+                return;
+            }
 
             // close the form and load the stock form
             new StockForm().Show();

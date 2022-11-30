@@ -12,7 +12,7 @@ namespace StockSystem.Forms
             // validation check - make sure that the username and password is actually present
             if (txtUsername.Text == string.Empty || txtPassword.Text == string.Empty)
             {
-                MessageBox.Show("Enter a valid username or pasword.", Program.title);
+                MessageBox.Show("Enter a valid username or pasword.", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -35,12 +35,24 @@ namespace StockSystem.Forms
             var user = Program.authManager.AuthUser(txtUsername.Text, txtPassword.Text);
             if (user == null)
             {
-                MessageBox.Show("You have entered an incorrect username or password.", Program.title);
+                MessageBox.Show("You have entered an incorrect username or password.", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // check if the user is possibly a guest (unverified account)
+            if (user.GetRole() == Authentication.Role.Guest)
+            {
+                MessageBox.Show("Your account has not been verified yet!\nPlease contact your manager to resolve the issue.", Program.title, 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // set user as global static variable
             Program.activeUser = user;
+
+            // clear login details
+            txtUsername.Text = string.Empty;
+            txtPassword.Text = string.Empty;
 
             // instantiate a new stock form and show it.
             new StockForm().Show();

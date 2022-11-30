@@ -2,26 +2,26 @@
 {
     public class User
     {
-        private string FirstName, LastName;
-        private string Username;
-        private string Hash, Salt;
-        private Role Role;
+        private string firstName, lastName;
+        private string username;
+        private string hash, salt;
+        private Role role;
 
         public User(string firstName, string lastName, string username, Role role, string hash, string salt)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            this.firstName = firstName;
+            this.lastName = lastName;
 
-            this.Username = username;
-            this.Role = role;
+            this.username = username;
+            this.role = role;
 
-            this.Hash = hash;
-            this.Salt = salt;
+            this.hash = hash;
+            this.salt = salt;
         }
 
         public string Serialize()
         {
-            return string.Join(":", new string[] { FirstName, LastName, Username, Convert.ToString((int)Role), Hash, Salt });
+            return string.Join(":", new string[] { firstName, lastName, username, Convert.ToString((int)role), hash, salt });
         }
 
         public static User? Deserialize(string data)
@@ -32,63 +32,63 @@
 
         public string GetFirstName()
         {
-            return FirstName;
+            return firstName;
         }
 
         public string GetLastName()
         {
-            return LastName;
+            return lastName;
         }
 
         public string GetUsername()
         {
-            return Username;
+            return username;
         }
 
         public Role GetRole()
         {
-            return Role;
+            return role;
         }
 
         public string GetHash()
         {
-            return Hash;
+            return hash;
         }
 
         public string GetSalt()
         {
-            return Salt;
+            return salt;
         }
 
         public void SetFirstName(string firstName)
         {
-            FirstName = firstName;
+            this.firstName = firstName;
         }
 
         public void SetLastName(string lastName)
         {
-            LastName = lastName;
+            this.lastName = lastName;
         }
 
         public void SetRole(Role role)
         {
-            Role = role;
+            this.role = role;
         }
 
         public void SetPassword(string password)
         {
-            Salt = Utility.Security.GenerateSalt();
-            Hash = Utility.Security.HashPassword(password, Salt);
+            salt = Utility.Security.GenerateSalt();
+            hash = Utility.Security.HashPassword(password, salt);
         }
 
         public void SetSalt(string salt)
         {
-            Salt = salt;
+            this.salt = salt;
         }
 
         public void SetHash(string hash)
         {
-            Hash = hash;
+            this.hash = hash;
         }
     }
 }

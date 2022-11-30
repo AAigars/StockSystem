@@ -19,7 +19,7 @@
             }
         }
 
-        public User? CreateUser(string firstName, string lastName, string username, string password, Role role = Role.Employee)
+        public User? CreateUser(string firstName, string lastName, string username, string password, Role role = Role.Guest)
         {
             var exists = users.Find(user => user.GetUsername() == username);
             if (exists != null) return null;

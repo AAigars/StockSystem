@@ -4,30 +4,30 @@ namespace StockSystem.Stock
 {
     public class Product
     {
-        private string Name;
-        private int Quantity;
-        private string? Image;
+        private string name;
+        private int quantity;
+        private string? image;
 
         public Product(string name, int quantity)
         {
-            Name = name;
-            Quantity = quantity;
-            Image = null;
+            this.name = name;
+            this.quantity = quantity;
+            this.image = null;
         }
 
         public Product(string name, int quantity, string image)
         {
-            Name = name;
-            Quantity = quantity;
-            Image = image;
+            this.name = name;
+            this.quantity = quantity;
+            this.image = image;
         }
 
         public string Serialize()
         {
-            var data = new List<string>() { Name, Quantity.ToString() };
+            var data = new List<string>() { name, quantity.ToString() };
 
             // image path is encoded, so special characters do not intefere when deserializing
-            if (Image != null) data.Add(HttpUtility.UrlEncode(Image));
+            if (image != null) data.Add(HttpUtility.UrlEncode(image));
 
             return string.Join(":", data);
         }
@@ -48,32 +48,32 @@ namespace StockSystem.Stock
 
         public string GetName()
         {
-            return Name;
+            return name;
         }
 
         public int GetQuantity()
         {
-            return Quantity;
+            return quantity;
         }
 
         public string? GetImage()
         {
-            return Image;
+            return image;
         }
 
         public void SetName(string name)
         {
-            Name = name;
+            this.name = name;
         }
 
         public void SetQuantity(int quantity)
         {
-            Quantity = quantity;
+            this.quantity = quantity;
         }
 
         public void SetImage(string image)
         {
-            Image = image;
+            this.image = image;
         }
     }
 }

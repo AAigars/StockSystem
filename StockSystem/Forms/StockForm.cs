@@ -175,7 +175,7 @@
             // check if the user is the correct role
             if (Program.activeUser == null || Program.activeUser.GetRole() != Authentication.Role.Manager)
             {
-                MessageBox.Show("You do not have enough privileges to access this menu!", Program.title);
+                MessageBox.Show("You do not have enough privileges to access this menu!", Program.title, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
