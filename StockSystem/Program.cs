@@ -6,7 +6,8 @@ namespace StockSystem
         ///  Static variables.
         /// </summary>
         public static string title = "Stock System";
-        public static string storageDirectory = "./data";
+        public static string storageDirectory = ".\\data";
+        public static string imageDirectory = storageDirectory + "\\images";
 
         public static Authentication.Manager authManager = new();
         public static Stock.Manager stockManager = new();
@@ -24,6 +25,7 @@ namespace StockSystem
             if (!Directory.Exists(storageDirectory))
             {
                 Directory.CreateDirectory(storageDirectory);
+                Directory.CreateDirectory(imageDirectory);
             }
 
             // Form entry point.

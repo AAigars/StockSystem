@@ -24,6 +24,14 @@
             var exists = GetProduct(name);
             if (exists != null) return null;
 
+            // save a copy of the image in the storage directory
+            if (image != string.Empty && image != null)
+            {
+                var file = image.Split("\\").Last();
+                File.Copy(image, Program.imageDirectory + "\\" + file);
+                image = file;
+            }
+
             var product = new Product(name, quantity, image);
             products.Add(product);
 

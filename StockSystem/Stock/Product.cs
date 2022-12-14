@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Reflection;
+using System.Web;
 
 namespace StockSystem.Stock
 {
@@ -58,7 +59,9 @@ namespace StockSystem.Stock
 
         public string? GetImage()
         {
-            return image;
+            if (image != null && image != string.Empty)
+                return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Program.imageDirectory + "\\" + image;
+            return null;
         }
 
         public void SetName(string name)
