@@ -28,7 +28,7 @@
             if (image != string.Empty && image != null)
             {
                 var file = image.Split("\\").Last();
-                File.Copy(image, Program.imageDirectory + "\\" + file);
+                File.Copy(image, Program.imageDirectory + "\\" + file, true);
                 image = file;
             }
 
@@ -43,6 +43,15 @@
         {
             var product = GetProduct(name);
             if (product == null) return;
+            
+            /*
+             * remove image copy if exists
+             * cant get it to work as the image is in use by the process apparently
+             
+               var image = product.GetImage();
+               if (image != null && image != string.Empty)
+                   File.Delete(image);
+            */
 
             products.Remove(product);
             SaveProducts();
